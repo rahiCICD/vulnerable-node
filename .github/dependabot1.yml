@@ -1,8 +1,17 @@
-version: 2
-updates:
-  - package-ecosystem: "" # See documentation for possible values
-    directory: "/" # Location of package manifests
-    schedule:
-      interval: "daily"
-          target-branch: "rahiCICD-patch-1"
+name: Dependabot
+on:
+  push:
+    branches:
+      - master
 
+jobs:
+  dependabot:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Run Dependabot
+        uses: dependabot/dependabot-core@v0.161.1
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
